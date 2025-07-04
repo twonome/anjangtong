@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>안장 파인더 by 안장통바이시클</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+</head>
+<body>
+    <div class="nine">
+      <h1>안장추천 AI<span>안장통바이시클 제공</span></h1>
+    </div>
+
+    <div id="main-container" class="container">
+        <div id="main-button-container">
+            <button class="main-cta-button" onclick="startQuestionnaire()">나에게 맞는 안장 자동추천받기 (30초)</button>
+        </div>
+
+        <div class="category-container">
+            <button onclick="showCategory('태그', '숏핏')">#숏핏 안장 모두보기</button>
+            <button onclick="showCategory('태그', '3D안장')">#3D안장 모두보기</button>
+            <button onclick="showCategory('태그', '여성용안장')">#여성용안장 모두보기</button>
+            <button onclick="showAllWithInfo()">#안장별 컷아웃/앞코폭 정보</button>
+        </div>
+
+        <div id="question-container" style="display:none;"></div>
+    </div>
+
+    <script src="scripts.js"></script>
+</body>
+</html>
