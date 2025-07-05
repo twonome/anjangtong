@@ -21,35 +21,31 @@ body {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
     width: 100%;
     max-width: 500px;
-    margin-bottom: 20px;
+    margin-top: 20px; /* 헤더와의 기본 간격 */
 }
 
 /* ========================================
-   타이틀 스타일
+   헤더 스타일 (PC & 모바일 공통)
 ======================================== */
-/* ========================================
-   헤더 스타일 최종 복구 버전
-======================================== */
-
 .nine h1 {
-  text-align:center; 
-  font-size:50px; 
-  text-transform:uppercase; 
-  color:#222; 
+  text-align:center;
+  font-size:50px;
+  text-transform:uppercase;
+  color:#222;
   letter-spacing:1px;
-  font-family:"Playfair Display", serif; 
+  font-family:"Playfair Display", serif;
   font-weight:400;
 }
 
 .nine h1 span {
   margin-top: 5px;
-  font-size:15px; 
-  color:#444; 
-  word-spacing:1px; 
-  font-weight:normal; 
+  font-size:15px;
+  color:#444;
+  word-spacing:1px;
+  font-weight:normal;
   letter-spacing:2px;
-  text-transform: uppercase; 
-  font-family:"Raleway", sans-serif; 
+  text-transform: uppercase;
+  font-family:"Raleway", sans-serif;
   font-weight:500;
   display: grid;
   grid-template-columns: 1fr max-content 1fr;
@@ -58,7 +54,6 @@ body {
   align-items: center;
 }
 
-/* ★★★ 원래의 멋진 선 스타일로 복구 ★★★ */
 .nine h1 span:after, .nine h1 span:before {
     content: " ";
     display: block;
@@ -66,24 +61,6 @@ body {
     border-top: 1px solid #ccc;
     height: 5px;
     background-color:#f8f8f8;
-}
-
-/* 모바일 화면(600px 이하)에 대한 스타일 */
-@media (max-width: 600px) {
-    .nine h1 {
-        font-size: 30px; /* 모바일용 폰트 크기 */
-    }
-    
-    .nine h1 span {
-        font-size: 12px; /* 모바일용 폰트 크기 */
-        display: block;  /* 모바일에서는 그리드를 풀고 단순 블록으로 변경 */
-        grid-template-columns: none; /* 그리드 설정 해제 */
-    }
-
-    /* 모바일에서는 양옆의 선을 숨김 처리 */
-    .nine h1 span:after, .nine h1 span:before {
-        display: none;
-    }
 }
 
 /* ========================================
@@ -112,7 +89,7 @@ body {
     color: white;
     width: 90%;
     max-width: 300px;
-    line-height: 1.5; /* 줄바꿈을 위한 줄 간격 추가 */
+    line-height: 1.5;
 }
 .main-cta-button:hover {
     background-color: #0056b3;
@@ -246,7 +223,7 @@ body {
 }
 
 /* ========================================
-   모바일 반응형 스타일
+   모바일 반응형 스타일 (600px 이하)
 ======================================== */
 @media (max-width: 600px) {
     body {
@@ -254,17 +231,17 @@ body {
     }
     .container {
         padding: 15px;
+        margin-top: 0; /* 모바일에서는 헤더와 컨테이너 간격 제거 */
     }
     .nine h1 {
-        font-size: 24px;
+        font-size: 30px; /* 모바일 헤더 폰트 크기 */
     }
     .nine h1 span {
-        display: block;
-        grid-template-columns: none;
-        font-size: 10px;
+        font-size: 12px; /* 모바일 서브 헤더 폰트 크기 */
+        grid-gap: 10px; /* 모바일용 선 간격 */
     }
     .nine h1 span:after, .nine h1 span:before {
-        display: none;
+        height: 3px; /* 모바일용 선 두께 */
     }
     .recommendation-container {
         grid-template-columns: repeat(2, 1fr);
