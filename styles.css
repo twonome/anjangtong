@@ -256,3 +256,24 @@ body {
         font-size: 0.8em;
     }
 }
+/* ========================================
+   질문 전환 애니메이션 효과
+======================================== */
+
+/* 애니메이션 효과 정의 */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 질문(h2)과 버튼에 애니메이션 적용 */
+#question-container h2,
+#question-container button {
+    animation: fadeInUp 0.5s ease-in-out;
+}
