@@ -1,5 +1,5 @@
-// ★★★ 여기에 사장님의 파이어베이스 연결 정보(firebaseConfig)를 붙여넣으세요 ★★★
- const firebaseConfig = {
+// ★★★ 여기에 사장님의 파이어베이스 연결 정보(firebaseConfig)는 그대로 유지하세요 ★★★
+const firebaseConfig = {
   apiKey: "AIzaSyAiKxmT16G1RmtmcGVfRU3wYo0CUc1KWq8",
   authDomain: "saddle-finder-3deb1.firebaseapp.com",
   projectId: "saddle-finder-3deb1",
@@ -36,10 +36,16 @@ const answers = {};
 //--- 시작 페이지(index.html)에서 사용하는 함수들 ---//
 
 function startQuestionnaire() {
-    document.getElementById('main-button-container').style.display = 'none';
-    document.getElementById('category-container').style.display = 'none';
-    document.getElementById('question-container').style.display = 'flex';
-    showQuestion();
+    const mainButtonContainer = document.getElementById('main-button-container');
+    const categoryContainer = document.getElementById('category-container');
+    const questionContainer = document.getElementById('question-container');
+
+    if (mainButtonContainer) mainButtonContainer.style.display = 'none';
+    if (categoryContainer) categoryContainer.style.display = 'none';
+    if (questionContainer) {
+        questionContainer.style.display = 'flex';
+        showQuestion();
+    }
 }
 
 function showCategory(field, value) {
@@ -118,10 +124,10 @@ function renderSaddles(saddles, container, showInfo) {
         if (showInfo) {
             const infoDiv = document.createElement('div');
             infoDiv.className = 'info';
-            const cutoutText = saddle.컷아웃 ? `컷아웃: ${saddle.컷아웃}` : '컷아웃: 정보없음';
-            const noseWidthText = saddle.앞코폭 ? `앞코폭: ${saddle.앞코폭}` : '앞코폭: 정보없음';
-            infoDiv.textContent = `${cutoutText}, ${noseWidthText}`;
-            div.appendChild(infoDiv);
+            const cutoutText = saddle.컷아웃 ? `컷아웃: ${saddle.컷아웃}` : '';
+            const noseWidthText = saddle.앞코폭 ? `앞코폭: ${saddle.앞코폭}` : '';
+            infoDiv.textContent = [cutoutText, noseWidthText].filter(Boolean).join(', ');
+            if(infoDiv.textContent) div.appendChild(infoDiv);
         }
         
         container.appendChild(div);
@@ -146,6 +152,8 @@ function loadRecommendations() {
         if (filterType === 'category') {
             const field = localStorage.getItem('category_field');
             const value = localStorage.getItem('category_value');
+            // ★★★★★ 버그 수정 지점 ★★★★★
+            // '태그' 필드가 배열이므로, '포함' 여부(.includes)로 확인해야 합니다.
             matchedSaddles = allSaddles.filter(saddle => 
                 Array.isArray(saddle[field]) && saddle[field].includes(value)
             );
