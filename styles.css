@@ -21,32 +21,35 @@ body {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
     width: 100%;
     max-width: 500px;
-}
-
-h1, h2 {
-    text-align: center;
-    color: #333;
+    margin-bottom: 20px;
 }
 
 .nine h1 {
-  text-align:center; font-size:40px; text-transform:uppercase; color:#222; letter-spacing:1px;
-  font-family:"Playfair Display", serif; font-weight:600;
-  margin-bottom: 0;
+    text-align: center;
+    font-size: 30px;
+    text-transform: uppercase;
+    color: #222;
+    letter-spacing: 1px;
+    font-family: "Playfair Display", serif;
+    font-weight: 600;
+    margin-bottom: 0;
 }
+
 .nine h1 span {
-  margin-top: 8px;
-    font-size:14px; color:#555; word-spacing:1px; font-weight:normal; letter-spacing:2px;
-    text-transform: uppercase; font-family:"Raleway", sans-serif; font-weight:500;
+    margin-top: 8px;
+    font-size: 12px;
+    color: #555;
+    word-spacing: 1px;
+    font-weight: normal;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-family: "Raleway", sans-serif;
+    font-weight: 500;
     display: grid;
     grid-template-columns: 1fr max-content 1fr;
-    grid-gap: 20px;
+    grid-gap: 15px;
     align-items: center;
-    margin-bottom: 25px;
-}
-.nine h1 span:after,.nine h1 span:before {
-    content: " ";
-    display: block;
-    border-bottom: 1px solid #e0e0e0;
+    margin-bottom: 15px;
 }
 
 #main-button-container {
@@ -55,8 +58,8 @@ h1, h2 {
 }
 
 .main-cta-button {
-    padding: 15px 30px;
-    font-size: 1.2em;
+    padding: 12px 25px;
+    font-size: 1em;
     font-weight: bold;
     background-color: #007bff;
     color: white;
@@ -64,11 +67,8 @@ h1, h2 {
     border-radius: 8px;
     cursor: pointer;
     transition: background-color 0.3s, transform 0.2s;
-}
-
-.main-cta-button:hover {
-    background-color: #0056b3;
-    transform: translateY(-2px);
+    width: 90%;
+    max-width: 300px;
 }
 
 .category-container {
@@ -81,17 +81,13 @@ h1, h2 {
 .category-container button {
     background-color: #6c757d;
     color: white;
-    padding: 8px 15px;
+    padding: 6px 12px;
     margin: 5px;
     border-radius: 20px;
-    font-size: 0.9em;
+    font-size: 0.8em;
     border: none;
     cursor: pointer;
     transition: background-color 0.3s;
-}
-
-.category-container button:hover {
-    background-color: #5a6268;
 }
 
 #question-container {
@@ -101,32 +97,57 @@ h1, h2 {
 }
 
 #question-container h2 {
-    margin-bottom: 20px;
+    font-size: 1.2em;
+    margin-bottom: 15px;
+    text-align: center;
 }
 
 #question-container button {
-    padding: 12px 20px;
+    padding: 10px 18px;
     background-color: #28a745;
     color: white;
     border: none;
-    font-size: 1em;
+    font-size: 0.9em;
     cursor: pointer;
     border-radius: 8px;
-    margin-top: 10px;
+    margin-top: 8px;
     width: 90%;
+    max-width: 300px;
     transition: background-color 0.3s;
 }
 
-#question-container button:hover {
-    background-color: #218838;
+.banner-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 600px;
+    padding: 10px;
+    background-color: white;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    border-radius: 10px;
+}
+
+.banner-container a {
+    margin-bottom: 10px;
+    width: 100%;
+}
+
+.banner-container img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    display: block;
 }
 
 .recommendation-container {
     display: flex;
     flex-wrap: wrap;
-    gap: 20px;
+    gap: 15px;
     justify-content: center;
     padding: 20px;
+    width: 100%;
     max-width: 1200px;
 }
 
@@ -134,34 +155,73 @@ h1, h2 {
     background: white;
     border: 1px solid #e0e0e0;
     border-radius: 8px;
-    padding: 15px;
+    padding: 10px;
     text-align: center;
-    width: 180px;
+    width: calc(50% - 10px);
+    max-width: 180px;
     transition: transform 0.3s, box-shadow 0.3s;
     cursor: pointer;
 }
 
 .recommendation img {
-    width: 120px;
-    height: 120px;
+    width: 80px;
+    height: 80px;
     object-fit: contain;
-    margin-bottom: 10px;
+    margin-bottom: 8px;
 }
 
 .recommendation p {
     font-weight: bold;
     color: #333;
-    font-size: 1em;
+    font-size: 0.9em;
     margin: 0;
 }
 
 .recommendation .info {
-    font-size: 0.85em;
+    font-size: 0.75em;
     color: #666;
-    margin-top: 8px;
+    margin-top: 5px;
 }
 
-.recommendation:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+/* 모바일 환경에 대한 추가 스타일 (600px 이하) */
+@media (max-width: 600px) {
+    body {
+        padding: 10px;
+    }
+    .container {
+        padding: 15px;
+    }
+    .nine h1 {
+        font-size: 24px;
+    }
+    .nine h1 span {
+        font-size: 10px;
+        grid-gap: 10px;
+        margin-bottom: 10px;
+    }
+    .main-cta-button {
+        font-size: 0.9em;
+        padding: 10px 20px;
+    }
+    .category-container button {
+        font-size: 0.7em;
+        padding: 5px 10px;
+    }
+    #question-container h2 {
+        font-size: 1em;
+    }
+    #question-container button {
+        font-size: 0.8em;
+    }
+    .recommendation {
+        width: calc(50% - 8px); /* 모바일에서 2개씩 */
+        max-width: none;
+    }
+}
+
+/* 더 작은 화면에 대한 추가 조정 (400px 이하) */
+@media (max-width: 400px) {
+    .recommendation {
+        width: 100%; /* 더 작은 화면에서 1개씩 */
+    }
 }
