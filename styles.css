@@ -226,3 +226,14 @@ body {
         font-size: 0.8em;
     }
 }
+.discount-notice {
+    font-weight: bold;
+    color: #d9534f; /* 눈에 띄는 빨간색 계열 */
+    margin-top: 15px; /* 배너와의 간격 */
+    padding: 10px;
+    background-color: #fcf8e3; /* 부드러운 노란색 배경 */
+    border: 1px solid #faebcc;
+    border-radius: 8px;
+    text-align: center;
+    width: 100%;
+}
