@@ -27,38 +27,63 @@ body {
 /* ========================================
    타이틀 스타일
 ======================================== */
+/* ========================================
+   헤더 스타일 최종 복구 버전
+======================================== */
+
 .nine h1 {
-  text-align: center;
-  font-size: 30px;
-  text-transform: uppercase;
-  color: #222;
-  letter-spacing: 1px;
-  font-family: "Playfair Display", serif;
-  font-weight: 600;
-  margin-bottom: 0;
+  text-align:center; 
+  font-size:50px; 
+  text-transform:uppercase; 
+  color:#222; 
+  letter-spacing:1px;
+  font-family:"Playfair Display", serif; 
+  font-weight:400;
 }
 
 .nine h1 span {
-  margin-top: 8px;
-  font-size: 12px;
-  color: #555;
-  word-spacing: 1px;
-  font-weight: normal;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  font-family: "Raleway", sans-serif;
-  font-weight: 500;
-  align-items: center;
-  margin-bottom: 15px;
+  margin-top: 5px;
+  font-size:15px; 
+  color:#444; 
+  word-spacing:1px; 
+  font-weight:normal; 
+  letter-spacing:2px;
+  text-transform: uppercase; 
+  font-family:"Raleway", sans-serif; 
+  font-weight:500;
   display: grid;
   grid-template-columns: 1fr max-content 1fr;
-  grid-gap: 15px;
+  grid-template-rows: 27px 0;
+  grid-gap: 20px;
+  align-items: center;
 }
 
+/* ★★★ 원래의 멋진 선 스타일로 복구 ★★★ */
 .nine h1 span:after, .nine h1 span:before {
     content: " ";
     display: block;
-    border-bottom: 1px solid #e0e0e0;
+    border-bottom: 1px solid #ccc;
+    border-top: 1px solid #ccc;
+    height: 5px;
+    background-color:#f8f8f8;
+}
+
+/* 모바일 화면(600px 이하)에 대한 스타일 */
+@media (max-width: 600px) {
+    .nine h1 {
+        font-size: 30px; /* 모바일용 폰트 크기 */
+    }
+    
+    .nine h1 span {
+        font-size: 12px; /* 모바일용 폰트 크기 */
+        display: block;  /* 모바일에서는 그리드를 풀고 단순 블록으로 변경 */
+        grid-template-columns: none; /* 그리드 설정 해제 */
+    }
+
+    /* 모바일에서는 양옆의 선을 숨김 처리 */
+    .nine h1 span:after, .nine h1 span:before {
+        display: none;
+    }
 }
 
 /* ========================================
