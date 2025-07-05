@@ -7,6 +7,7 @@ const firebaseConfig = {
   messagingSenderId: "529749925138",
   appId: "1:529749925138:web:2727193bf36a68e355e7cb"
 };
+
 // ★★★ =============================================================== ★★★
 
 // Firebase 앱 초기화
@@ -15,26 +16,25 @@ if (!firebase.apps.length) {
 }
 const db = firebase.firestore();
 
-// 새 질문 목록
+// 사장님께서 알려주신 정확한 질문과 옵션 목록
 const questions = [
     { key: '성별', question: '성별을 선택해 주세요', options: ['남', '여'] },
     { key: '좌골사이즈', question: '좌골사이즈를 선택해 주세요', options: ['모름', '100이하', '105이하', '110이하', '115이하', '120이하', '125이하', '130이하', '135이하', '140이하', '140초과'] },
-    { key: '자전거', question: '자전거는 어떤 것을 타시나요?', options: ['로드/픽시', 'MTB/하이브리드'] },
-    { key: '얼마나 유연하세요?', question: '얼마나 유연하세요?', options: ['유연함', '보통', '뻣뻣함'] },
-    { key: '라이딩 자세', question: '주로 어떤 자세로 라이딩 하시나요?', options: ['공격적(숙여서)', '편안하게(세워서)'] },
-    { key: '좌골통증', question: '좌골 통증은 얼마나 심하시나요?', options: ['없음', '약', '중', '강'] },
-    { key: '회음부통증', question: '회음부 통증은 얼마나 심하시나요?', options: ['없음', '약', '중', '강'] },
-    { key: '안장 포지션을 자주 변경하시나요?', question: '안장 포지션을 자주 변경하시나요?', options: ['네', '아니요'] },
-    { key: '라이딩 거리', question: '주행하시는 라이딩 거리는 보통 어느정도 되시나요?', options: ['단거리(30km 미만)', '중거리(30-80km)', '장거리(80km 이상)'] },
-    { key: '레일 규격', question: '레일 규격을 선택해주세요', options: ['상관없음', '일반레일(7x7)', '카본레일(7x9)', '카본레일(7x10)'] },
-    { key: '가격', question: '원하시는 안장 새제품 가격대를 선택해주세요', options: ['상관없음', '10만원 이하', '10만원대', '20만원대', '30만원대', '40만원 이상'] }
+    { key: '자전거', question: '자전거는 어떤 것을 타시나요?', options: ['로드', 'MTB', '그래블', '건너뛰기'] },
+    { key: '얼마나 유연하세요?', question: '얼마나 유연하세요?', options: ['유연하지 않음', '보통', '유연함'] },
+    { key: '라이딩 자세', question: '주로 어떤 자세로 라이딩 하시나요?', options: ['바로선 자세', '중간 자세', '에어로 자세'] },
+    { key: '좌골통증', question: '좌골 통증은 얼마나 심하시나요?', options: ['없음', '약', '중약', '중', '중강', '강'] },
+    { key: '회음부통증', question: '회음부 통증은 얼마나 심하시나요?', options: ['없음', '약', '중약', '중', '중강', '강'] },
+    { key: '안장 포지션을 자주 변경하시나요?', question: '안장 포지션을 자주 변경하시나요?', options: ['적음', '보통', '많음'] },
+    { key: '라이딩 거리', question: '주행하시는 라이딩 거리는 보통 어느정도 되시나요?', options: ['5km미만', '10km미만', '20km미만', '30km미만', '50km미만', '100km미만', '100km이상'] },
+    { key: '레일 규격', question: '레일 규격을 선택해주세요', options: ['상관없음(위아래로물리는클램프)', '일반레일 7x7', '카본레일 7x9', '카본레일 7x10'] },
+    { key: '가격', question: '원하시는 안장 새제품 가격대를 선택해주세요', options: ['상관없음', '10만원이하', '10만원대', '20만원대', '30만원대', '40만원이상'] }
 ];
 
 let currentQuestionIndex = 0;
 const answers = {};
 
 //--- 시작 페이지(index.html)에서 사용하는 함수들 ---//
-
 function startQuestionnaire() {
     const mainButtonContainer = document.getElementById('main-button-container');
     const categoryContainer = document.getElementById('category-container');
@@ -61,7 +61,6 @@ function showAllWithInfo() {
 }
 
 //--- 질문 페이지(index.html)에서 사용하는 함수들 ---//
-
 function showQuestion() {
     const questionContainer = document.getElementById('question-container');
     if (!questionContainer) return;
@@ -94,9 +93,7 @@ function nextQuestion() {
     }
 }
 
-
 //--- 결과 페이지(recommendations.html)에서 사용하는 함수 ---//
-
 function renderSaddles(saddles, container, showInfo) {
     container.innerHTML = "";
     if (saddles.length === 0) {
@@ -112,7 +109,7 @@ function renderSaddles(saddles, container, showInfo) {
         }
 
         const img = document.createElement('img');
-        img.src = saddle.img || 'images/placeholder.png'; // 이미지가 없을 경우 대체 이미지
+        img.src = saddle.img || 'images/placeholder.png';
         img.alt = saddle.name;
 
         const p = document.createElement('p');
@@ -127,7 +124,7 @@ function renderSaddles(saddles, container, showInfo) {
             const cutoutText = saddle.컷아웃 ? `컷아웃: ${saddle.컷아웃}` : '';
             const noseWidthText = saddle.앞코폭 ? `앞코폭: ${saddle.앞코폭}` : '';
             infoDiv.textContent = [cutoutText, noseWidthText].filter(Boolean).join(', ');
-            if(infoDiv.textContent) div.appendChild(infoDiv);
+            if (infoDiv.textContent) div.appendChild(infoDiv);
         }
         
         container.appendChild(div);
@@ -152,11 +149,21 @@ function loadRecommendations() {
         if (filterType === 'category') {
             const field = localStorage.getItem('category_field');
             const value = localStorage.getItem('category_value');
+            
             // ★★★★★ 버그 수정 지점 ★★★★★
-            // '태그' 필드가 배열이므로, '포함' 여부(.includes)로 확인해야 합니다.
-            matchedSaddles = allSaddles.filter(saddle => 
-                Array.isArray(saddle[field]) && saddle[field].includes(value)
-            );
+            // 데이터가 배열이든, "숏핏,3D안장" 같은 글자이든 모두 포함 여부를 확인하도록 수정
+            matchedSaddles = allSaddles.filter(saddle => {
+                const saddleValue = saddle[field]; // 예: saddle['태그']
+                if (Array.isArray(saddleValue)) {
+                    // 데이터가 ["숏핏", "3D안장"] 같은 배열일 경우
+                    return saddleValue.includes(value);
+                } else if (typeof saddleValue === 'string') {
+                    // 데이터가 "숏핏,3D안장" 같은 글자일 경우
+                    return saddleValue.includes(value);
+                }
+                return false;
+            });
+
         } else if (filterType === 'info') {
             matchedSaddles = allSaddles;
             showInfo = true;
@@ -166,8 +173,15 @@ function loadRecommendations() {
                 matchedSaddles = allSaddles.filter(saddle => {
                     return Object.keys(savedAnswers).every(key => {
                         const answer = savedAnswers[key];
-                        if (answer === '상관없음' || answer === '모름') return true;
-                        return Array.isArray(saddle[key]) ? saddle[key].includes(answer) : saddle[key] === answer;
+                        if (answer === '상관없음' || answer === '모름' || answer === '건너뛰기') return true;
+                        
+                        const saddleValue = saddle[key];
+                        if (Array.isArray(saddleValue)) {
+                            return saddleValue.includes(answer);
+                        } else if (typeof saddleValue === 'string') {
+                            return saddleValue.includes(answer);
+                        }
+                        return saddleValue === answer;
                     });
                 });
             }
@@ -175,7 +189,6 @@ function loadRecommendations() {
         
         renderSaddles(matchedSaddles, container, showInfo);
         
-        // 사용한 필터 정보 삭제
         localStorage.removeItem('filter_type');
         localStorage.removeItem('category_field');
         localStorage.removeItem('category_value');
@@ -189,8 +202,9 @@ function loadRecommendations() {
 
 // 페이지가 로드되면 어떤 작업을 할지 결정
 document.addEventListener('DOMContentLoaded', () => {
-    // recommendation.html 페이지인 경우에만 추천 로직 실행
     if (document.body.classList.contains('recommendations')) {
         loadRecommendations();
+    } else {
+        // index.html에서는 버튼 클릭으로 시작하므로 특별히 할 작업 없음
     }
 });
