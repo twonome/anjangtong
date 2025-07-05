@@ -9,7 +9,7 @@ body {
     background-color: #f8f9fa;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: center; /* ★ 수정: 모든 내용을 가운데 정렬합니다. */
     min-height: 100vh;
     padding: 20px;
 }
@@ -52,9 +52,19 @@ body {
     margin-bottom: 15px;
 }
 
-#main-button-container {
+#main-button-container,
+.category-container {
     text-align: center;
-    padding: 20px 0;
+    padding: 15px 0;
+}
+
+.main-cta-button,
+.category-container button,
+#question-container button {
+    cursor: pointer;
+    border: none;
+    border-radius: 8px;
+    transition: all 0.3s ease;
 }
 
 .main-cta-button {
@@ -63,18 +73,15 @@ body {
     font-weight: bold;
     background-color: #007bff;
     color: white;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: background-color 0.3s, transform 0.2s;
     width: 90%;
     max-width: 300px;
 }
+.main-cta-button:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px);
+}
 
 .category-container {
-    text-align: center;
-    margin-top: 15px;
-    padding-top: 15px;
     border-top: 1px solid #eee;
 }
 
@@ -85,9 +92,9 @@ body {
     margin: 5px;
     border-radius: 20px;
     font-size: 0.8em;
-    border: none;
-    cursor: pointer;
-    transition: background-color 0.3s;
+}
+.category-container button:hover {
+    background-color: #5a6268;
 }
 
 #question-container {
@@ -106,14 +113,13 @@ body {
     padding: 10px 18px;
     background-color: #28a745;
     color: white;
-    border: none;
     font-size: 0.9em;
-    cursor: pointer;
-    border-radius: 8px;
     margin-top: 8px;
     width: 90%;
     max-width: 300px;
-    transition: background-color 0.3s;
+}
+#question-container button:hover {
+    background-color: #218838;
 }
 
 .banner-container {
@@ -142,32 +148,33 @@ body {
 }
 
 .recommendation-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 15px;
-    justify-content: center;
-    padding: 20px;
     width: 100%;
-    max-width: 1200px;
+    max-width: 1200px; /* PC에서 보여줄 최대 너비 */
+    padding: 20px;
+    justify-content: center;
+
+    /* ★★★ PC 화면 레이아웃 핵심 수정 ★★★ */
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 20px;
 }
 
 .recommendation {
     background: white;
     border: 1px solid #e0e0e0;
     border-radius: 8px;
-    padding: 10px;
+    padding: 15px;
     text-align: center;
-    width: calc(50% - 10px);
-    max-width: 180px;
     transition: transform 0.3s, box-shadow 0.3s;
     cursor: pointer;
+    /* ★ 수정: 너비를 grid가 관리하므로 삭제 */
 }
 
 .recommendation img {
-    width: 80px;
-    height: 80px;
+    width: 100px;
+    height: 100px;
     object-fit: contain;
-    margin-bottom: 8px;
+    margin-bottom: 10px;
 }
 
 .recommendation p {
@@ -180,8 +187,14 @@ body {
 .recommendation .info {
     font-size: 0.75em;
     color: #666;
-    margin-top: 5px;
+    margin-top: 8px;
 }
+
+.recommendation:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
 
 /* 모바일 환경에 대한 추가 스타일 (600px 이하) */
 @media (max-width: 600px) {
@@ -199,29 +212,17 @@ body {
         grid-gap: 10px;
         margin-bottom: 10px;
     }
-    .main-cta-button {
-        font-size: 0.9em;
-        padding: 10px 20px;
+    .recommendation-container {
+        /* 모바일에서는 2열 그리드로 변경 */
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+        padding: 10px;
     }
-    .category-container button {
-        font-size: 0.7em;
-        padding: 5px 10px;
+    .recommendation img {
+        width: 80px;
+        height: 80px;
     }
-    #question-container h2 {
-        font-size: 1em;
-    }
-    #question-container button {
+    .recommendation p {
         font-size: 0.8em;
-    }
-    .recommendation {
-        width: calc(50% - 8px); /* 모바일에서 2개씩 */
-        max-width: none;
-    }
-}
-
-/* 더 작은 화면에 대한 추가 조정 (400px 이하) */
-@media (max-width: 400px) {
-    .recommendation {
-        width: 100%; /* 더 작은 화면에서 1개씩 */
     }
 }
